@@ -1,33 +1,44 @@
 # 📚 Hệ thống Quản lý Thư Viện
 
-Ứng dụng CLI (C++17) tối ưu hóa quy trình mượn/trả sách, quản lý độc giả và xử lý hàng đợi thư viện bằng các cấu trúc dữ liệu kinh điển.
+Ứng dụng CLI quản lý kho sách, độc giả và quy trình mượn/trả sách, được tối ưu hóa bằng các cấu trúc dữ liệu kinh điển (C++17).
 
-**🚀 Cài đặt & Chạy:** `g++ -std=c++17 src/main.cpp src/functions.cpp -o app && ./app` *(Windows: đổi `./app` thành `app.exe`)*
-
----
-
-### 🛠 Cấu trúc dữ liệu & Chức năng cốt lõi
-
-* **BST ($O(\log n)$):** Quản lý kho sách. Hỗ trợ Thêm, Xóa, Sửa và Tìm kiếm (theo mã/tên) tốc độ cao.
-* **Queue (FIFO):** Xử lý hàng đợi. Tự động đưa độc giả vào danh sách chờ khi sách hết và lập tức cấp phát sách khi có người trả.
-* **Stack (LIFO):** Lưu lịch sử thao tác mượn/trả, hỗ trợ tính năng **Hoàn tác (Undo)** trạng thái tức thì.
-* **Linked List:** Quản lý danh sách độc giả linh hoạt, cấp phát bộ nhớ động không gây lãng phí.
-* **Tính năng phụ:** Thống kê sách hot/độc giả tích cực; Lưu & khôi phục dữ liệu từ file `.txt`.
+> **Lệnh biên dịch & chạy:** `g++ -std=c++17 src/main.cpp src/functions.cpp -o app && ./app`
+> *(Lưu ý: Trên Windows, đổi `./app` thành `app.exe`)*
 
 ---
 
-### 🧪 5 Kịch bản kiểm thử (Test Cases)
+### 🛠 1. Cấu trúc dữ liệu sử dụng
 
-1.  **Thêm & Tìm kiếm:** Nhập 3 sách mới $\rightarrow$ Tìm mã "B002" $\rightarrow$ Hiển thị chính xác thông tin.
-2.  **Mượn sách (Kho > 0):** Độc giả mượn $\rightarrow$ Số lượng giảm 1, thao tác được ghi vào Stack.
-3.  **Vào hàng đợi (Kho = 0):** Độc giả mượn sách đã hết $\rightarrow$ Tự động đẩy vào Queue của sách đó.
-4.  **Trả & Cấp phát:** Khách trả sách $\rightarrow$ Hệ thống tự động pop người đầu Queue ra và cho mượn tiếp.
-5.  **Hoàn tác (Undo):** Chọn Undo $\rightarrow$ Hủy thao tác mượn/trả cuối cùng, khôi phục nguyên vẹn trạng thái.
+* **BST :** Quản lý kho sách. Giúp thêm, xóa, sửa và tìm kiếm sách (theo mã) tốc độ cao.
+* **Queue (FIFO):** Quản lý hàng đợi. Đảm bảo công bằng: ai đăng ký chờ sách trước sẽ được mượn trước.
+* **Stack (LIFO):** Quản lý lịch sử thao tác. Hỗ trợ tính năng **Undo (Hoàn tác)** lại hành động mượn/trả vừa thực hiện.
+* **Linked List:** Quản lý danh sách độc giả. Cấp phát bộ nhớ động linh hoạt, dễ dàng thêm/xóa mà không gây lãng phí.
 
 ---
 
-### 📂 Cấu trúc File (`src/`)
+### 🚀 2. Chức năng chính
 
-* `main.cpp` : Menu UI Console và điều khiển luồng chương trình.
-* `structures.h` : Khai báo các struct (Book, Reader) và nguyên mẫu hàm.
-* `functions.cpp`: Cài đặt chi tiết logic giải thuật của hệ thống.
+* **Quản lý Sách:** Thêm, xóa, sửa và tìm kiếm (theo mã hoặc tên).
+* **Mượn/Trả thông minh:** Tự động xếp khách vào Queue nếu sách hết; tự động xuất Queue cấp sách khi có người trả.
+* **Hoàn tác:** Xem lịch sử và Undo thao tác cuối cùng.
+* **Tiện ích:** Thống kê (Sách hot, Độc giả tích cực) & Lưu/Đọc toàn bộ dữ liệu qua file `.txt`.
+
+---
+
+### 🧪 3. Kịch bản kiểm thử (Test Cases)
+
+1. **Thêm & Tìm kiếm:** Nhập sách mới vào hệ thống $\rightarrow$ Tìm theo mã $\rightarrow$ Hiển thị đúng thông tin sách.
+2. **Mượn sách hợp lệ:** Mượn sách khi tồn kho > 0 $\rightarrow$ Số lượng giảm 1, ghi nhận lịch sử vào Stack.
+3. **Vào hàng đợi (Queue):** Mượn sách khi tồn kho = 0 $\rightarrow$ Độc giả được tự động đẩy vào danh sách chờ.
+4. **Trả sách tự động:** Trả cuốn sách đang có người đợi $\rightarrow$ Hệ thống lấy người đầu Queue ra và tự động cho mượn.
+5. **Hoàn tác (Undo):** Chọn chức năng Undo $\rightarrow$ Hủy thao tác mượn/trả cuối cùng, khôi phục lại trạng thái cũ.
+
+---
+
+### 📂 4. Cấu trúc mã nguồn
+
+```text
+src/
+├── main.cpp       # Menu Console và luồng điều khiển chính
+├── structures.h   # Khai báo cấu trúc (Book, Reader) và nguyên mẫu hàm
+└── functions.cpp  # Cài đặt chi tiết logic giải thuật
