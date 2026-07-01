@@ -9,12 +9,12 @@
 
 ### 🛠 1. Cấu trúc dữ liệu sử dụng
 
-* **BST ($O(\log n)$):** Quản lý kho sách. Giúp thêm, xóa, sửa và tìm kiếm sách (theo mã) tốc độ cao.
-* **Queue (FIFO):** Quản lý hàng đợi. Đảm bảo công bằng: ai đăng ký chờ sách trước sẽ được mượn trước.
-* **Stack (LIFO):** Quản lý lịch sử thao tác. Hỗ trợ tính năng **Undo (Hoàn tác)** lại hành động mượn/trả vừa thực hiện.
-* **Linked List:** Quản lý danh sách độc giả. Cấp phát bộ nhớ động linh hoạt, dễ dàng thêm/xóa mà không gây lãng phí.
-
----
+| Cấu trúc dữ liệu | Kỹ thuật | Vai trò và Ưu điểm |
+| :--- | :--- | :--- |
+| **BST** | Cây nhị phân tìm kiếm | Quản lý kho sách. Giúp thêm, xóa, sửa và tìm kiếm sách (theo mã) với tốc độ cao **O(log n)**. |
+| **Queue** | Hàng đợi (FIFO) | Quản lý hàng đợi. Đảm bảo công bằng: ai đăng ký chờ sách trước sẽ được mượn trước. |
+| **Stack** | Ngăn xếp (LIFO) | Quản lý lịch sử thao tác. Hỗ trợ tính năng **Undo (Hoàn tác)** lại hành động mượn/trả vừa thực hiện. |
+| **Linked List** | Danh sách liên kết | Quản lý danh sách độc giả. Cấp phát bộ nhớ động linh hoạt, dễ dàng thêm/xóa mà không gây lãng phí. |
 
 ### 🚀 2. Chức năng chính
 
