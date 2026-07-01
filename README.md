@@ -32,3 +32,4 @@ src/
   main.cpp       - Menu giao diện console và điều khiển luồng chương trình
   structures.h   - Khai báo các struct (Book, Reader) và nguyên mẫu hàm
   functions.cpp  - Cài đặt chi tiết logic của các cấu trúc dữ liệu và chức năng
+
